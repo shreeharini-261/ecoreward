@@ -1,15 +1,60 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard | EcoRewards</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.11.3/main.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.11.3/main.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
-    <h2>Welcome to Your Dashboard</h2>
-    <p>Total Rewards: {{ data[0] if data else 0 }}</p>
-    <p>Activities Completed: {{ data[1] if data else 0 }}</p>
-    <a href="{{ url_for('rewards') }}">View Rewards</a>
-    <a href="{{ url_for('logout') }}">Logout</a>
+
+    <div class="dashboard-container">
+        <header>
+            <h1>Welcome, <span class="username">{{ current_user.username }}</span></h1>
+            <a href="{{ url_for('logout') }}" class="logout-btn">Logout</a>
+        </header>
+
+        <div class="stats-container">
+            <div class="stats-card">
+                <h3>Total Rewards</h3>
+                <p>{{ data[0] if data else 0 }}</p>
+            </div>
+            <div class="stats-card">
+                <h3>Activities Completed</h3>
+                <p>{{ data[1] if data else 0 }}</p>
+            </div>
+        </div>
+
+        <div class="calendar-section">
+            <h3>Activity Calendar</h3>
+            <div id="calendar"></div>
+        </div>
+
+        <div class="btn-container">
+            <a href="{{ url_for('rewards') }}" class="btn">View Rewards</a>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var calendarEl = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                events: [
+                    {% for reward in rewards %}
+                        {
+                            title: "{{ reward[0] }}",
+                            start: "{{ reward[2] }}"
+                        },
+                    {% endfor %}
+                ]
+            });
+            calendar.render();
+        });
+    </script>
+
 </body>
 </html>

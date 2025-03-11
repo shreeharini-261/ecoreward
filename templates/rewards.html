@@ -1,17 +1,17 @@
-<!DOCTYPE html>
 <html>
 <head>
     <title>Rewards | EcoRewards</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
-
 </head>
 <body>
-    <h2>Your Rewards</h2>
-    <ul>
-        {% for reward in rewards %}
-            <li>{{ reward[0] }} - {{ reward[1] }} points (Earned: {{ reward[2] }})</li>
-        {% endfor %}
-    </ul>
-    <a href="{{ url_for('dashboard') }}">Back to Dashboard</a>
+    <div class="rewards-container">
+        <h2>Your Rewards</h2>
+        <ul>
+            {% for reward in rewards %}
+                <li><strong>{{ reward[0] }}</strong> - {{ reward[1] }} points (Earned: {{ reward[2] }})</li>
+            {% endfor %}
+        </ul>
+        <a href="{{ url_for('dashboard') }}" class="btn">Back to Dashboard</a>
+    </div>
 </body>
 </html>
