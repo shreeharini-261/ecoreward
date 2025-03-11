@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard | EcoRewards</title>
+</head>
+<body>
+    <h2>Welcome to Your Dashboard</h2>
+    <p>Total Rewards: {{ data[0] if data else 0 }}</p>
+    <p>Activities Completed: {{ data[1] if data else 0 }}</p>
+    <a href="{{ url_for('rewards') }}">View Rewards</a>
+    <a href="{{ url_for('logout') }}">Logout</a>
+</body>
+</html>

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Rewards | EcoRewards</title>
+</head>
+<body>
+    <h2>Your Rewards</h2>
+    <ul>
+        {% for reward in rewards %}
+            <li>{{ reward[0] }} - {{ reward[1] }} points (Earned: {{ reward[2] }})</li>
+        {% endfor %}
+    </ul>
+    <a href="{{ url_for('dashboard') }}">Back to Dashboard</a>
+</body>
+</html>
